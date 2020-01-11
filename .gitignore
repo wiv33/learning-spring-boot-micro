@@ -1,0 +1,6 @@
+# Project exclude paths
+/.gradle/
+/part07/comments/build/
+/part07/comments/build/classes/java/main/
+/part07/eureka-server/build/
+/part07/eureka-server/build/classes/java/main/

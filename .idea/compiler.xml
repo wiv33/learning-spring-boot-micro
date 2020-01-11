@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="CompilerConfiguration">
+    <bytecodeTargetLevel>
+      <module name="comments_main" target="1.8" />
+      <module name="comments_test" target="1.8" />
+      <module name="eureka-server_main" target="1.8" />
+      <module name="eureka-server_test" target="1.8" />
+      <module name="images_main" target="1.8" />
+      <module name="images_test" target="1.8" />
+    </bytecodeTargetLevel>
+  </component>
+</project>
