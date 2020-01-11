@@ -1,7 +1,9 @@
 package com.psawesome.learning;
 
 import com.psawesome.learning.images.Comment;
+import com.psawesome.learning.images.CommentHelper;
 import com.psawesome.learning.images.ImageService;
+import lombok.RequiredArgsConstructor;
 import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.http.HttpMethod;
 import org.springframework.stereotype.Controller;
@@ -19,18 +21,14 @@ import java.util.List;
  * DATE: 2020-01-11 토요일 12:39
  */
 @Controller
+@RequiredArgsConstructor
 public class HomeController {
 
     private final ImageService imageService;
 
     // tag::injection[]
-    private final RestTemplate restTemplate;
+    private final CommentHelper commentHelper;
 
-    public HomeController(ImageService imageService,
-                          RestTemplate restTemplate) {
-        this.imageService = imageService;
-        this.restTemplate = restTemplate;
-    }
     // end::injection[]
 
     @GetMapping("/")
@@ -42,13 +40,8 @@ public class HomeController {
                             put("id", image.getId());
                             put("name", image.getName());
                             put("comments",
-                                    // tag::comments[]
-                                    restTemplate.exchange(
-                                            "http://COMMENTS/comments/{imageId}",
-                                            HttpMethod.GET,
-                                            null,
-                                            new ParameterizedTypeReference<List<Comment>>() {},
-                                            image.getId()).getBody());
+                            // tag::comments[]
+                                    commentHelper.getComments(image));
                             // end::comments[]
                         }})
         );

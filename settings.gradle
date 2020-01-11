@@ -8,6 +8,6 @@ include 'part07:eureka-server'
 findProject(':part07:eureka-server')?.name = 'eureka-server'
 include 'part07:comments'
 findProject(':part07:comments')?.name = 'comments'
-include 'part07:hystrics'
-findProject(':part07:hystrics')?.name = 'hystrics'
+include 'part07:config-server'
+findProject(':part07:config-server')?.name = 'config-server'
 

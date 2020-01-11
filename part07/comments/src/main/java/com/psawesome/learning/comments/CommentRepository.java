@@ -9,8 +9,7 @@ import reactor.core.publisher.Mono;
  * author: PS
  * DATE: 2020-01-11 토요일 12:33
  */
-public interface CommentRepository
-        extends Repository<Comment, String> {
+public interface CommentRepository extends Repository<Comment, String> {
 
     Flux<Comment> findByImageId(String imageId);
 

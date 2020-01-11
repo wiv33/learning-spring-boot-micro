@@ -3,10 +3,12 @@ package com.psawesome.learning;
 import com.psawesome.learning.images.Comment;
 import com.psawesome.learning.images.CommentController;
 import com.psawesome.learning.images.ImageRepository;
+import lombok.RequiredArgsConstructor;
 import org.springframework.boot.context.event.ApplicationReadyEvent;
 import org.springframework.context.annotation.Profile;
 import org.springframework.context.event.EventListener;
 import org.springframework.stereotype.Component;
+import org.springframework.validation.support.BindingAwareModelMap;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
@@ -21,19 +23,15 @@ import java.util.concurrent.atomic.AtomicInteger;
 // tag::code[]
 @Profile("simulator")
 @Component
+@RequiredArgsConstructor
 public class CommentSimulator {
 
+    private final HomeController homeController;
     private final CommentController controller;
     private final ImageRepository repository;
 
     private final AtomicInteger counter;
 
-    public CommentSimulator(CommentController controller,
-                            ImageRepository repository) {
-        this.controller = controller;
-        this.repository = repository;
-        this.counter = new AtomicInteger(1);
-    }
 
     @EventListener
     public void simulateComments(ApplicationReadyEvent event) {
@@ -50,6 +48,15 @@ public class CommentSimulator {
                 .flatMap(newComment ->
                         Mono.defer(() ->
                                 controller.addComment(newComment)))
+                .subscribe();
+    }
+
+    @EventListener
+    public void simulateUsersClicking(ApplicationReadyEvent event) {
+        Flux
+                .interval(Duration.ofMillis(500))
+                .flatMap(tick ->
+                        Mono.defer(() -> homeController.index(new BindingAwareModelMap())))
                 .subscribe();
     }
 

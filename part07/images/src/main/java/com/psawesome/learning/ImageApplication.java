@@ -12,12 +12,10 @@ import org.springframework.web.filter.reactive.HiddenHttpMethodFilter;
  * DATE: 2020-01-11 토요일 12:38
  */
 @SpringCloudApplication
-@EnableEurekaClient
 public class ImageApplication {
 
     public static void main(String[] args) {
-        SpringApplication.run(
-                ImageApplication.class, args);
+        SpringApplication.run(ImageApplication.class, args);
     }
 
     @Bean
