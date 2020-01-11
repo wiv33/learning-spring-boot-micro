@@ -1,10 +1,13 @@
+rootProject.name = ('learning-spring-boot-micro')
 
 include 'part07:comments'
-//findProject(':part07:comments')?.name = 'comments'
+findProject(':part07:comments')?.name = 'comments'
 include 'part07:images'
-//findProject(':part07:images')?.name = 'images'
+findProject(':part07:images')?.name = 'images'
 include 'part07:eureka-server'
-//findProject(':part07:eureka-server')?.name = 'eureka-server'
+findProject(':part07:eureka-server')?.name = 'eureka-server'
 include 'part07:comments'
-//findProject(':part07:comments')?.name = 'comments'
+findProject(':part07:comments')?.name = 'comments'
+include 'part07:hystrics'
+findProject(':part07:hystrics')?.name = 'hystrics'
 

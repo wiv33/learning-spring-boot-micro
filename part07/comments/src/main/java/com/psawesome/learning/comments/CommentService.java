@@ -49,8 +49,6 @@ public class CommentService {
 
     @Bean
     CommandLineRunner setUp(CommentRepository repository) {
-        return args -> {
-            repository.deleteAll().subscribe();
-        };
+        return args -> repository.deleteAll().subscribe();
     }
 }
