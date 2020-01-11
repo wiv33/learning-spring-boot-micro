@@ -26,7 +26,9 @@ public class WebSocketConfig {
         이 메서드가 웹소켓 메시지 처리를 위한 경로를 연결한다는 것
     */
     @Bean
-    HandlerMapping webSocketMapping(CommentService commentService) {
+    HandlerMapping webSocketMapping(CommentService commentService,
+                                    InboundChatService inboundChatService,
+                                    OutboundChatService outboundChatService) {
         /*
             /topic/comments.new 를 사용해 맵을 로드하고
             WebSocketHandler 인터페이스를 구현하는 클래스와 연결
@@ -34,7 +36,8 @@ public class WebSocketConfig {
         */
         Map<String, WebSocketHandler> urlMap = new HashMap<>();
         urlMap.put("/topic/comments.new", commentService);
-
+        urlMap.put("/app/chatMessage.new", inboundChatService);
+        urlMap.put("/topic/chatMessage.new", outboundChatService);
 
         /*
             Cross-origin Resource Sharing
@@ -44,6 +47,8 @@ public class WebSocketConfig {
         CorsConfiguration corsConfiguration = new CorsConfiguration();
         corsConfiguration.addAllowedOrigin("http://localhost:8080");
         corsConfigurationMap.put("/topic/comments.new", corsConfiguration);
+        corsConfigurationMap.put("/app/chatMessage.new", corsConfiguration);
+        corsConfigurationMap.put("/topic/chatMessage.new", corsConfiguration);
 
         /* 스프링 부트의 자동 설정에 정의된 다른 라우트 핸들러보다 먼저 볼 수 있는 설정(Order)를 추가 */
         SimpleUrlHandlerMapping mapping = new SimpleUrlHandlerMapping();
